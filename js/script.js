@@ -39,7 +39,8 @@ var draggin = function() {
         	ui.helper.addClass('ui-draggable-dragging'); 
         },
         
-        update: function(event, ui) {
+        receive: function(event, ui) {
+        	alert('received!');
         	ui.helper.removeClass('ui-draggable-dragging'); 
         },
     });
