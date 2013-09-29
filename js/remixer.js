@@ -69,7 +69,7 @@ window.Remixer = (function() {
         that.loadSongInfo();
 
         // DUMMY SONG FOR CASE TO PLAY WITH
-        // that.randomSong();
+        that.randomSong();
         return track;
       }
     })
@@ -276,6 +276,19 @@ window.Remixer = (function() {
 })(this);
 
 window.remixer = new Remixer();
-remixer.addTrack("TRUKTZP1416712D3B8", "https://dl.dropboxusercontent.com/u/34120492/songs/aint_it_funny.mp3");
-remixer.addTrack("TRPJHTS1416713A719", "https://dl.dropboxusercontent.com/u/34120492/songs/ask_myself.mp3");
-remixer.addTrack("TRYQMCZ1416A710F20", "https://dl.dropboxusercontent.com/u/34120492/songs/crazy_in_love.mp3");
+
+$("#add-song").click(function() {
+  var $item = $('#song-selector').find(":selected");
+  var sel_track = $item.attr('id');
+  var sel_url = $item.attr('url');
+  remixer.addTrack(sel_track, sel_url);
+  $item.remove();
+
+  if ($("#song-selector").find('option').length == 0) {
+    $("#add-songs").hide();
+  }
+});
+
+//remixer.addTrack("TRUKTZP1416712D3B8", "https://dl.dropboxusercontent.com/u/34120492/songs/aint_it_funny.mp3");
+//remixer.addTrack("TRPJHTS1416713A719", "https://dl.dropboxusercontent.com/u/34120492/songs/ask_myself.mp3");
+//remixer.addTrack("TRYQMCZ1416A710F20", "https://dl.dropboxusercontent.com/u/34120492/songs/crazy_in_love.mp3");
