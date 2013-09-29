@@ -17,7 +17,7 @@ window.Remixer = (function() {
     };
     this.initRemixer();
     this.initPlayer();
-    this.initPlayOnClick();
+    this.bindControls();
   };
 
   Remixer.prototype.initRemixer = function() {
@@ -89,21 +89,49 @@ window.Remixer = (function() {
     for (var beatIdx = 32; beatIdx < 44; beatIdx++) {
       this.appendBeat(songNum, beatIdx);
     };
-    this.setListCallbacks(songNum);
+    this.bindSnippetPreview(songNum);
     draggin();
   };
 
-// Play the remixed song.
+// Play
 
   Remixer.prototype.play = function() {
     this.player.stop();
     this.player.play(0, this.remixed);
   };
 
-// Pause the song currently playing.
+ // Pause
 
   Remixer.prototype.pause = function() {
     this.player.stop();
+  };
+
+
+// Bind controller actions to the DOM elements.
+
+  Remixer.prototype.bindControls = function() {
+    this.bindPlayOnClick();
+    this.bindPauseOnClick();
+  }
+
+  Remixer.prototype.bindPlayOnClick = function() {
+    var that = this;
+    $(".play").click(function() {
+      that.remixed = new Array();
+      $("#song-list li").each(function(idx, item) {
+        var beatKey = $(item).attr('remix-item');
+        var beat = that.dict[beatKey];
+        that.remixed.push(beat);
+      });
+    that.play();
+    });
+  };
+
+  Remixer.prototype.bindPauseOnClick = function() {
+    var that = this;
+    $('.pause').click(function() {
+      that.pause();
+    })
   };
 
 // Play only a single beat.
@@ -142,6 +170,8 @@ window.Remixer = (function() {
     return beatsArr;   
   };
 
+  // View Logic
+
   Remixer.prototype.loadSongInfo = function() {
     var songNum = this.songs.length;
     var song = _.last(this.songs);
@@ -150,21 +180,6 @@ window.Remixer = (function() {
     var idSelector = "#song-" + songNum;
     $(idSelector).children(".title").text(title);
     $(idSelector).children(".artist").text(artist);
-  };
-
-  // View Logic
-
-  Remixer.prototype.initPlayOnClick = function() {
-    var that = this;
-    $("#play").click(function() {
-      that.remixed = new Array();
-      $("#song-list li").each(function(idx, item) {
-        var beatKey = $(item).attr('remix-item');
-        var beat = that.dict[beatKey];
-        that.remixed.push(beat);
-      });
-    that.play();
-    });
   };
 
   Remixer.prototype.initPlayFromPoint = function() {
@@ -204,7 +219,7 @@ window.Remixer = (function() {
     return $beatLi;
   };
 
-  Remixer.prototype.setListCallbacks = function(songNum) {
+  Remixer.prototype.bindSnippetPreview = function(songNum) {
     var that = this;
     var songLiSelector = "#song-" + songNum + " ul li";
     $(songLiSelector).click(function(event) {
@@ -213,6 +228,19 @@ window.Remixer = (function() {
       snippet.push(that.dict[beatKey]);
       that.playSnippet(snippet);
     });
+  };
+
+  Remixer.prototype.songLength = function() {
+    var that = this;
+    var duration = 0;
+    var $beatLis = $("#song-list li");
+    $beatLis.each(function(idx, item) {
+      var beatKey = $(item).attr('remix-item');
+      var beat = that.dict[beatKey];
+      var beatLength = parseFloat(beat.duration);
+      duration += beatLength;
+    })
+    return duration;
   };
 
   return Remixer;
