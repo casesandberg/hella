@@ -120,21 +120,21 @@ window.Remixer = (function() {
     var barIndex = 6;
     this.appendBar(songNum, 6);
 
-    for (var beatIdx = 40; beatIdx < 45; beatIdx++) {
+    for (var beatIdx = 40; beatIdx < 44; beatIdx++) {
       this.appendBeat(songNum, beatIdx);
     };
 
     var barIndex = 8;
     this.appendBar(songNum, 8);
 
-    for (var beatIdx = 48; beatIdx < 54; beatIdx++) {
+    for (var beatIdx = 48; beatIdx < 52; beatIdx++) {
       this.appendBeat(songNum, beatIdx);
     };
 
     var barIndex = 10;
     this.appendBar(songNum, 10);
 
-    for (var beatIdx = 56; beatIdx < 63; beatIdx++) {
+    for (var beatIdx = 56; beatIdx < 60; beatIdx++) {
       this.appendBeat(songNum, beatIdx);
     };
 
@@ -321,8 +321,10 @@ window.Remixer = (function() {
 })(this);
 
 window.remixer = new Remixer();
+window.total_songs = 0;
 
 $("#add-song").click(function() {
+  window.total_songs++;
   var $item = $('#song-selector').find(":selected");
   var sel_track = $item.attr('id');
   var sel_url = $item.attr('url');
@@ -332,6 +334,12 @@ $("#add-song").click(function() {
   if ($("#song-selector").find('option').length == 0) {
     $("#add-songs").hide();
   }
+
+  if (window.total_songs >=3) {
+    $('#add-songs').remove();
+    $('#songs').addClass('songs-' + window.total_songs)
+  }
+
   return false;
 });
 
