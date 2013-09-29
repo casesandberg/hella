@@ -245,9 +245,11 @@ window.Remixer = (function() {
 
   Remixer.prototype.$liEl = function(songNum, beatIndex) {
     var key = 'track' + songNum + '_bar' + beatIndex;
+    var beat = this.dict[key];
     var $beatLi = $('<li></li>').attr('remix-item', key)
                                 .addClass('beat song-' + songNum + ' beat' + (beatIndex % 4 + 1))
-                                .attr('data-beats', 1);
+                                .attr('data-beats', 1)
+                                .attr('data-length', beat.duration);
     return $beatLi;
   };
 
