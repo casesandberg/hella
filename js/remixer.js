@@ -127,6 +127,20 @@ window.Remixer = (function() {
     var barIndex = 8;
     this.appendBar(songNum, 8);
 
+    for (var beatIdx = 48; beatIdx < 54; beatIdx++) {
+      this.appendBeat(songNum, beatIdx);
+    };
+
+    var barIndex = 10;
+    this.appendBar(songNum, 10);
+
+    for (var beatIdx = 56; beatIdx < 63; beatIdx++) {
+      this.appendBeat(songNum, beatIdx);
+    };
+
+    var barIndex = 12;
+    this.appendBar(songNum, 12);
+
     this.bindSnippetPreview(songNum);
     draggin();
   };
