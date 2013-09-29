@@ -67,7 +67,7 @@ window.Remixer = (function() {
         that.loadSongBeatLis();
         console.log("Track analyzed! Song " + songNum + " added.");
         that.loadSongInfo();
-
+        $("#songs").removeClass("songs-" + (that.songs.length - 1)).addClass("songs-" + that.songs.length);
         // DUMMY SONG FOR CASE TO PLAY WITH
         that.generateBeats(32);
         return track;
@@ -337,7 +337,6 @@ $("#add-song").click(function() {
 
   if (window.total_songs >=3) {
     $('#add-songs').remove();
-    $('#songs').addClass('songs-' + window.total_songs)
   }
 
   return false;
