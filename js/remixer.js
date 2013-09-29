@@ -69,7 +69,7 @@ window.Remixer = (function() {
         that.loadSongInfo();
 
         // DUMMY SONG FOR CASE TO PLAY WITH
-        // that.randomSong();
+        that.randomSong();
         return track;
       }
     })
@@ -249,7 +249,7 @@ window.Remixer = (function() {
 
   Remixer.prototype.bindSnippetPreview = function(songNum) {
     var that = this;
-    var songLiSelector = "#song-" + songNum + "ul li";
+    var songLiSelector = "#song-" + songNum + " ul li";
     $(songLiSelector).click(function(event) {
       var snippet = [];
       var beatKey = $(event.target).attr('remix-item');
