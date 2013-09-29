@@ -6,6 +6,7 @@ header{
 	position: fixed;
 	width: 100%;
 	background: #333;
+	z-index: 100;
 	.clearfix;
 	.logo{
 		float: left;
@@ -276,7 +277,24 @@ h3{
 	& > div {
 		width: 300px;
 		float: left;
-		margin: 0 20px 0 20px;
+	}
+	&.songs-1 > div{
+		width: 49%
+	}
+	&.songs-2 > div{
+		width: 49%
+	}
+	&.songs-2 > div:nth-child(2){
+		float: right;
+	}
+	&.songs-3 > div{
+		width: 32%
+	}
+	&.songs-3 > div:nth-child(2){
+		margin: 0 0 0 2%;
+	}
+	&.songs-3 > div:nth-child(3){
+		float: right;
 	}
 }
 
