@@ -13,7 +13,6 @@ var draggin = function() {
 		return false;
 	});
 	
-	
 	$mixBucket.sortable({
 		revert: true,
 		update: function (event, ui){        	

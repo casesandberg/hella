@@ -17,7 +17,7 @@ window.Remixer = (function() {
     };
     this.initRemixer();
     this.initPlayer();
-    this.initPlayOnClick();
+    this.bindControls();
   };
 
   Remixer.prototype.initRemixer = function() {
@@ -53,6 +53,10 @@ window.Remixer = (function() {
         that.songs.push(track);
         that.loadSongBeatLis();
         console.log("Track analyzed! Song " + songNum + " added.");
+        that.loadSongInfo();
+
+        // DUMMY SONG FOR CASE TO PLAY WITH
+        // that.randomSong();
         return track;
       }
     })
@@ -67,16 +71,19 @@ window.Remixer = (function() {
       return song.analysis.beats.length;
     }).analysis.beats.length;
 
-    for (var i = 0; i < numberOfBeats; i++) {
-      if (i % 4 == 0 || i % 4 == 2) {
-        remixed.push(this.songs[0].analysis.beats[i]);
-      } else if (i % 4 == 1 || i % 4 == 3) {
-        remixed.push(this.songs[1].analysis.beats[i]);
+    for (var i = 0; i < 6; i++) {
+      for (var j = 0; j < this.songs.length; j++) {
+        var songNum = j + 1;
+        var beatIndex = i;
+        var key = 'track' + songNum + '_bar' + beatIndex;
+        var song = this.songs[songNum - 1];
+        this.dict[key] = song.analysis.beats[beatIndex];
+        var $beatLi = this.$liEl(songNum, beatIndex);
+        $('#song-list').append($beatLi);
+        this.bindSnippetPreview(songNum);
       }
     }
-
-    return this.remixed;
-
+    draggin();
   };
 
 // Loads the initial beat list items to interact with on the DOM.
@@ -88,21 +95,49 @@ window.Remixer = (function() {
     for (var beatIdx = 32; beatIdx < 44; beatIdx++) {
       this.appendBeat(songNum, beatIdx);
     };
-    this.setListCallbacks(songNum);
+    this.bindSnippetPreview(songNum);
     draggin();
   };
 
-// Play the remixed song.
+// Play
 
   Remixer.prototype.play = function() {
     this.player.stop();
     this.player.play(0, this.remixed);
   };
 
-// Pause the song currently playing.
+ // Pause
 
   Remixer.prototype.pause = function() {
     this.player.stop();
+  };
+
+
+// Bind controller actions to the DOM elements.
+
+  Remixer.prototype.bindControls = function() {
+    this.bindPlayOnClick();
+    this.bindPauseOnClick();
+  }
+
+  Remixer.prototype.bindPlayOnClick = function() {
+    var that = this;
+    $(".play").click(function() {
+      that.remixed = new Array();
+      $("#song-list li").each(function(idx, item) {
+        var beatKey = $(item).attr('remix-item');
+        var beat = that.dict[beatKey];
+        that.remixed.push(beat);
+      });
+    that.play();
+    });
+  };
+
+  Remixer.prototype.bindPauseOnClick = function() {
+    var that = this;
+    $('.pause').click(function() {
+      that.pause();
+    })
   };
 
 // Play only a single beat.
@@ -143,17 +178,14 @@ window.Remixer = (function() {
 
   // View Logic
 
-  Remixer.prototype.initPlayOnClick = function() {
-    var that = this;
-    $("#play").click(function() {
-      that.remixed = new Array();
-      $("#song-list li").each(function(idx, item) {
-        var beatKey = $(item).attr('remix-item');
-        var beat = that.dict[beatKey];
-        that.remixed.push(beat);
-      });
-    that.play();
-    });
+  Remixer.prototype.loadSongInfo = function() {
+    var songNum = this.songs.length;
+    var song = _.last(this.songs);
+    var title = song.title;
+    var artist = song.artist;
+    var idSelector = "#song-" + songNum;
+    $(idSelector).children(".title").text(title);
+    $(idSelector).children(".artist").text(artist);
   };
 
   Remixer.prototype.initPlayFromPoint = function() {
@@ -193,9 +225,9 @@ window.Remixer = (function() {
     return $beatLi;
   };
 
-  Remixer.prototype.setListCallbacks = function(songNum) {
+  Remixer.prototype.bindSnippetPreview = function(songNum) {
     var that = this;
-    var songLiSelector = "#song-" + songNum + " ul li";
+    var songLiSelector = "li.song-" + songNum;
     $(songLiSelector).click(function(event) {
       var snippet = [];
       var beatKey = $(event.target).attr('remix-item');
@@ -204,10 +236,23 @@ window.Remixer = (function() {
     });
   };
 
+  Remixer.prototype.songLength = function() {
+    var that = this;
+    var duration = 0;
+    var $beatLis = $("#song-list li");
+    $beatLis.each(function(idx, item) {
+      var beatKey = $(item).attr('remix-item');
+      var beat = that.dict[beatKey];
+      var beatLength = parseFloat(beat.duration);
+      duration += beatLength;
+    })
+    return duration;
+  };
+
   return Remixer;
 
 })(this);
 
 window.remixer = new Remixer();
-remixer.addTrack("TRUKTZP1416712D3B8", "https://dl.dropboxusercontent.com/u/34120492/songs/aint_it_funny.mp3");
 remixer.addTrack("TRPJHTS1416713A719", "https://dl.dropboxusercontent.com/u/34120492/songs/ask_myself.mp3");
+remixer.addTrack("TRFLCFM1416A725D8A", "music/forgiveness_and_love.mp3");
