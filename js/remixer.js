@@ -31,31 +31,29 @@ window.Remixer = (function() {
     console.log("Player initialized.");
   };
 
-  Remixer.prototype.loadInitialBars = function() {
-
-  };
-
 // Add a new track to the remixer.
 
   Remixer.prototype.addTrack = function(trackID, trackURL) {
     var that = this;
     this.remixer.remixTrackById(trackID, trackURL, function(t, percent) {
       var track = t;
+      var songNum = that.songs.length + 1;
 
-      $("#info").text(percent + "% of the track loaded");
+      $("#info").text(percent + "% of song " + songNum + " loaded");
 
       if (percent < 100) {
-        console.log("Songs being analyzed.");
+        console.log("Song being analyzed.");
       }
   
       if (percent == 100) {
-        $("#info").text(percent + "% of the track loaded, remixing...");
+        $("#info").text(percent + "% of song " + songNum + " loaded, remixing...");
       }
 
       if (track.status == "ok") {
         that.songs.push(track);
-        console.log("Track analyzed! Song Added.");
-        return;
+        that.loadSongBeatLis();
+        console.log("Track analyzed! Song " + songNum + " added.");
+        return track;
       }
     })
   };
@@ -83,22 +81,15 @@ window.Remixer = (function() {
 
 // Loads the initial beat list items to interact with on the DOM.
 
-  Remixer.prototype.loadBeatLis = function() {
-    var song1 = this.songs[0];
-    var song2 = this.songs[1];
+  Remixer.prototype.loadSongBeatLis = function() {
+    var songNum = this.songs.length;
+    var song_len = this.songs[songNum - 1].analysis.bars.length;
 
-    song1_len = song1.analysis.bars.length;
-    song2_len = song2.analysis.bars.length;
-
-    for (var songNum = 1; songNum < 3; songNum++) {
-      for (var beatIdx = 32; beatIdx < 44; beatIdx++) {
-        this.appendBeat(songNum, beatIdx);
-      }
-      this.setListCallbacks(songNum);
-    }
-
+    for (var beatIdx = 32; beatIdx < 44; beatIdx++) {
+      this.appendBeat(songNum, beatIdx);
+    };
+    this.setListCallbacks(songNum);
     draggin();
-    return this.remixed;
   };
 
 // Play the remixed song.
@@ -165,6 +156,11 @@ window.Remixer = (function() {
     });
   };
 
+  Remixer.prototype.playFromPoint = function(event) {
+    var that = this;
+    var liIndex = $("#song-list li").index(event.target);
+  };
+
   Remixer.prototype.appendBeat = function(songNum, beatIndex) {
     var key = 'track' + songNum + '_bar' + beatIndex;
     var song = this.songs[songNum - 1];
@@ -177,7 +173,7 @@ window.Remixer = (function() {
   Remixer.prototype.$liEl = function(songNum, beatIndex) {
     var key = 'track' + songNum + '_bar' + beatIndex;
     var $beatLi = $('<li></li>').attr('remix-item', key)
-                                .addClass('ui-draggable beat song-' + songNum + ' beat' + (beatIndex%4+1))
+                                .addClass('ui-draggable beat song-' + songNum + ' beat' + (beatIndex % 4 + 1))
                                 .attr('data-beats', 1);
     return $beatLi;
   };
@@ -186,10 +182,10 @@ window.Remixer = (function() {
     var that = this;
     var songLiSelector = "#song-" + songNum + " ul li";
     $(songLiSelector).click(function(event) {
-      var remixed = [];
+      var snippet = [];
       var beatKey = $(event.target).attr('remix-item');
-      remixed.push(that.dict[beatKey]);
-      that.playSnippet(remixed);
+      snippet.push(that.dict[beatKey]);
+      that.playSnippet(snippet);
     });
   };
 
