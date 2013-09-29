@@ -156,12 +156,27 @@ window.Remixer = (function() {
     });
   };
 
+  Remixer.prototype.initPlayFromPoint = function() {
+    var that = this;
+    $("#song-list li").click(that.playFromPoint);
+  };
+
   Remixer.prototype.playFromPoint = function(event) {
     var that = this;
+    console.log(event);
     var liIndex = $("#song-list li").index(event.target);
+    var liCount = $("#song-list li").size();
+    var remixedSnippets = new Array();
+    for (var i = liIndex; i < liCount; i++) {
+      var item = $("#song-list li").eq(i).attr('remix-item');
+      var beat = that.dict[beatKey];
+      remixedSnippets.push(beat);
+    }
+    that.playSnippet(remixedSnippets);
   };
 
   Remixer.prototype.appendBeat = function(songNum, beatIndex) {
+    var that = this;
     var key = 'track' + songNum + '_bar' + beatIndex;
     var song = this.songs[songNum - 1];
     this.dict[key] = song.analysis.beats[beatIndex];
