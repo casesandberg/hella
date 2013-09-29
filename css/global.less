@@ -148,7 +148,8 @@ h3{
 		float: left;
 		margin: 0 5px 0 0;
 		a{
-			background: #333;
+			background: transparent;
+			color: #777;
 			border-radius: 4px;
 			position: relative;
 			height: 34px;
@@ -156,27 +157,38 @@ h3{
 			display: inline-block;
 			padding: 0 8px;
 			font-family: 'helvetica neue', helvetica, arial;
-			font-size: 15px;
-			color: #fff;
+			font-size: 17px;
 			-webkit-font-smoothing: antialiased;
 			font-weight: 300;
 			text-decoration: none;
+			.transition;
+			&:hover{
+				box-shadow: inset 0 0 0 1px #666;
+				color: #555;
+			}
 		}
 		.icon{
 			
 		}
 	}
-	.back{
-		.icon{
-			
-		}
+	.clear-songs{
+		float: right;
 	}
 	.play{
 		.icon{
 			
 		}
+		a{
+			box-shadow: inset 0 0 0 1px #333;
+			color: #333;
+			&:hover{
+				box-shadow: inset 0 0 0 1px #333!important;
+				background: #333;
+				color: #fff;
+			}
+		}
 	}
-	.pause{
+	.stop{
 		.icon{
 			
 		}

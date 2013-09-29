@@ -93,7 +93,7 @@ var draggin = function() {
 	function playhead(aciton, place){
 		if (action = 'play'){
 			$secondPush = ($mixWidth / length());
-			var count = setTimeout(counting, 200);
+			var count = setTimeout(counting, 1000);
 		}
 	}
 	
@@ -106,9 +106,10 @@ var draggin = function() {
 	var counter = 0;
 	function counting(){
 		counter = counter + $secondPush;
-		count = setTimeout(counting, 200);
+		count = setTimeout(counting, 1000);
+		seconds = Math.ceil((counter / 100));
 		$play.css('left', count + '%');
-		$play.find('.time').html('0:' + Math.ceil((counter / 100)));
+		$play.find('.time').html('0:' + (seconds<10 ? '0' + seconds : seconds));
 		/*
 if(counter >= length()){
 			abortTimer()
