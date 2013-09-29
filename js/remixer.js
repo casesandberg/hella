@@ -53,6 +53,7 @@ window.Remixer = (function() {
         that.songs.push(track);
         that.loadSongBeatLis();
         console.log("Track analyzed! Song " + songNum + " added.");
+        that.loadSongInfo();
         return track;
       }
     })
@@ -139,6 +140,16 @@ window.Remixer = (function() {
     }
 
     return beatsArr;   
+  };
+
+  Remixer.prototype.loadSongInfo = function() {
+    var songNum = this.songs.length;
+    var song = _.last(this.songs);
+    var title = song.title;
+    var artist = song.artist;
+    var idSelector = "#song-" + songNum;
+    $(idSelector).children(".title").text(title);
+    $(idSelector).children(".artist").text(artist);
   };
 
   // View Logic
