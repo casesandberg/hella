@@ -3,6 +3,7 @@ var draggin = function() {
 	var $mixBucket = $('#song-mix').find('.bucket'),
 		$mixBeats = $mixBucket.find('.beat'), 
 		$songBeats = $('#songs').find('.beat'),
+		$play = $('#play'),
 		
 		$mixWidth = $mixBucket.width() - 20;
 		
@@ -86,11 +87,12 @@ var draggin = function() {
 		for(var j = 0; j < $mixBeats.length; j++){
 			$mixBeats.eq(j).css('width', (($mixBeats.eq(j).attr('data-beats') * $mixWidth) / numberOfBeats) -1);
 		}
+		length();
 	}
 	
 	function playhead(aciton, place){
 		if (action = 'play'){
-			$secondPush = ($mixWidth / convert('2:29.460'));
+			$secondPush = ($mixWidth / length());
 			var count = setTimeout(counting, 200);
 		}
 	}
@@ -103,15 +105,49 @@ var draggin = function() {
 	
 	var counter = 0;
 	function counting(){
-		var $play = $('#play');
 		counter = counter + $secondPush;
-		console.log(counter);
 		count = setTimeout(counting, 200);
 		$play.css('left', count + '%');
-		$play.find('.time').html(Math.ceil((counter / 100)))
+		$play.find('.time').html('0:' + Math.ceil((counter / 100)));
+		if(counter >= length()){
+			abortTimer()
+		}
 	}
 	
 	function abortTimer(){
 		clearTimeout(count);
 	}
+	
+	function length(){
+		console.log('calculating length');
+		var $mixBeats = $mixBucket.find('.beat').not('.placeholder');
+		var fullLength = 0;
+		for(var i = 0; i < $mixBeats.length; i++){
+			fullLength = fullLength + parseFloat($mixBeats.eq(i).attr('data-length'));
+		}
+		return fullLength;
+	}
+	
+	function whatSong(){
+		var $mixBeats = $mixBucket.find('.beat').not('.placeholder');
+		var leftValue = $play.position().left - 40;
+		
+		console.log($mixBeats.eq(3).position().left);
+		console.log(leftValue);
+		for(var i = 0; i < $mixBeats.length; i++){
+			if($mixBeats.eq(i).position().left > leftValue){
+				var thisSong = $mixBeats.eq(i - 1).attr('id');
+			} else {
+				var thisSong = 'nope';
+			}
+		}
+		return thisSong;
+		
+		
+		abortTimer();
+	}
+		
+	$('.pause').click(function(){
+		console.log(whatSong());
+	});
 }
