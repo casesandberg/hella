@@ -86,7 +86,7 @@ window.Remixer = (function() {
 
     $("#song-list").empty();
     var songIter = maxBeats % this.songs.length;
-    for (var i = 0; i < maxBeats; i++) {
+    for (var i = 32; i < maxBeats + 32; i++) {
       if (i % 4 == 0 || i % 4 == 1) {
         var songNum = 1;
       } else {
@@ -113,9 +113,20 @@ window.Remixer = (function() {
     var songNum = this.songs.length;
     var song_len = this.songs[songNum - 1].analysis.bars.length;
 
-    for (var beatIdx = 32; beatIdx < 44; beatIdx++) {
+    for (var beatIdx = 32; beatIdx < 36; beatIdx++) {
       this.appendBeat(songNum, beatIdx);
     };
+
+    var barIndex = 6;
+    this.appendBar(songNum, 6);
+
+    for (var beatIdx = 40; beatIdx < 45; beatIdx++) {
+      this.appendBeat(songNum, beatIdx);
+    };
+
+    var barIndex = 8;
+    this.appendBar(songNum, 8);
+
     this.bindSnippetPreview(songNum);
     draggin();
   };
@@ -245,6 +256,16 @@ window.Remixer = (function() {
     var $beatLi = this.$liEl(songNum, beatIndex);
     var $songUl = $("#song-" + songNum + " ul");
     $songUl.append($beatLi);
+  }
+
+  Remixer.prototype.appendBar = function(songNum, barIndex) {
+    var that = this;
+    var key = 'track' + songNum + '_bar' + barIndex;
+    var song = this.songs[songNum - 1];
+    this.dict[key] = song.analysis.bars[barIndex];
+    var $barLi = this.$liEl(songNum, barIndex).attr('data-beats', 2);
+    var $songUl = $("#song-" + songNum + " ul");
+    $songUl.append($barLi);
   }
 
   Remixer.prototype.$liEl = function(songNum, beatIndex) {
