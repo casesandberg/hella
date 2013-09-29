@@ -318,11 +318,13 @@ $("#add-song").click(function() {
   if ($("#song-selector").find('option').length == 0) {
     $("#add-songs").hide();
   }
+  return false;
 });
 
 $(".clear-songs").click(function() {
   $("#song-list").html("");
   remixed = [];
+  return false;
 });
 
 //remixer.addTrack("TRUKTZP1416712D3B8", "https://dl.dropboxusercontent.com/u/34120492/songs/aint_it_funny.mp3");
