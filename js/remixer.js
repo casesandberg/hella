@@ -75,7 +75,7 @@ window.Remixer = (function() {
     })
   };
 
-// Generate a remix from the songs.
+// Generate a random remix from the songs.
 
   Remixer.prototype.randomSong = function() {
     var that = this;
