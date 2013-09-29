@@ -69,7 +69,7 @@ window.Remixer = (function() {
         that.loadSongInfo();
 
         // DUMMY SONG FOR CASE TO PLAY WITH
-        that.generateBeats(16);
+        that.generateBeats(32);
         return track;
       }
     })
@@ -87,9 +87,11 @@ window.Remixer = (function() {
     $("#song-list").empty();
     var songIter = maxBeats % this.songs.length;
     for (var i = 0; i < maxBeats; i++) {
-
-      var randomSongNum = Math.floor((Math.random() * this.songs.length));
-      var songNum = randomSongNum + 1;
+      if (i % 4 == 0 || i % 4 == 1) {
+        var songNum = 1;
+      } else {
+        var songNum = _.random(2, this.songs.length - 1);
+      }
       var beatIndex = i;
       var key = 'track' + songNum + '_bar' + beatIndex;
       var song = this.songs[songNum - 1];
