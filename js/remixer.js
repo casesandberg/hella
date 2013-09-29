@@ -69,7 +69,7 @@ window.Remixer = (function() {
         that.loadSongInfo();
 
         // DUMMY SONG FOR CASE TO PLAY WITH
-        that.randomSong();
+        that.generateBeats(16);
         return track;
       }
     })
@@ -77,24 +77,26 @@ window.Remixer = (function() {
 
 // Generate a random remix from the songs.
 
-  Remixer.prototype.randomSong = function() {
+  Remixer.prototype.generateBeats = function(maxBeats) {
     var that = this;
     var remixed = this.remixed;
     var numberOfBeats = _.min(this.songs, function(song, index) {
       return song.analysis.beats.length;
     }).analysis.beats.length;
 
-    for (var i = 0; i < 6; i++) {
-      for (var j = 0; j < this.songs.length; j++) {
-        var songNum = j + 1;
-        var beatIndex = i;
-        var key = 'track' + songNum + '_bar' + beatIndex;
-        var song = this.songs[songNum - 1];
-        this.dict[key] = song.analysis.beats[beatIndex];
-        var $beatLi = this.$liEl(songNum, beatIndex);
-        $('#song-list').append($beatLi);
-        this.bindSnippetPreview(songNum);
-      }
+    $("#song-list").empty();
+    var songIter = maxBeats % this.songs.length;
+    for (var i = 0; i < maxBeats; i++) {
+
+      var randomSongNum = Math.floor((Math.random() * this.songs.length));
+      var songNum = randomSongNum + 1;
+      var beatIndex = i;
+      var key = 'track' + songNum + '_bar' + beatIndex;
+      var song = this.songs[songNum - 1];
+      this.dict[key] = song.analysis.beats[beatIndex];
+      var $beatLi = this.$liEl(songNum, beatIndex);
+      $('#song-list').append($beatLi);
+      this.bindSnippetPreview(songNum);
     }
     draggin();
   };
