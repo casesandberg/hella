@@ -1,4 +1,4 @@
-$(function(){
+var draggin = function() {
 	
 	var $mixBucket = $("#song-mix").find('.bucket'),
 		$mixBeats = $mixBucket.find('.beat'), 
@@ -21,4 +21,4 @@ $(function(){
 	$mixBeats.each(function(){
 		$(this).css('width', '');
 	});
-});
+}
