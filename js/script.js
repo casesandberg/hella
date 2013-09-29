@@ -8,7 +8,11 @@ var draggin = function() {
 		
 	resize();
 	
-	//playhead('play');
+	$('#controls').find('.play').click(function(){
+		playhead('play');
+		return false;
+	});
+	
 	
 	$mixBucket.sortable({
 		revert: true,
@@ -28,8 +32,7 @@ var draggin = function() {
         
         placeholder: 'placeholder',
         start: function(event, ui) {
-            var width = $('.ui-draggable-dragging').width();
-			ui.placeholder.addClass('beat').css('width', width);
+			ui.placeholder.addClass('beat').css('width', $('.ui-draggable-dragging').width());
         },
     });
     
@@ -39,11 +42,12 @@ var draggin = function() {
 		revert: 'invalid',
 		
 		drag: function (event, ui){
-			//resize();
+			$(this).parent().addClass('dragging');
         },
 
         stop: function (event, ui){
         	resize();
+        	$(this).parent().removeClass('dragging');
         },
             
     });
@@ -62,12 +66,13 @@ var draggin = function() {
 	function resize(){
 		console.log('resizing');
 		$mixBeats = $mixBucket.find('.beat').not('.placeholder');
-		console.log('Length:' + $mixBeats.length);
 		var numberOfBeats = 0;
 		for(var i = 0; i < $mixBeats.length; i++){
 			numberOfBeats = numberOfBeats + parseInt($mixBeats.eq(i).attr('data-beats'));
 		}
-		console.log('Number of Beats:' + numberOfBeats);
+		if ($mixBeats.length < 10){
+			numberOfBeats = 20;
+		}
 		for(var j = 0; j < $mixBeats.length; j++){
 			$mixBeats.eq(j).css('width', (($mixBeats.eq(j).attr('data-beats') * $mixWidth) / numberOfBeats) -1);
 		}
