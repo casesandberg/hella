@@ -39,9 +39,10 @@ var draggin = function() {
         	ui.helper.addClass('ui-draggable-dragging'); 
         },
         
-        receive: function(event, ui) {
-        	alert('received!');
-        	ui.helper.removeClass('ui-draggable-dragging'); 
+        stop: function(event, ui) {
+        	setTimeout(function(){
+	        	$mixBeats.removeClass('ui-draggable-dragging');
+        	}, 200);
         },
     });
     
@@ -89,8 +90,8 @@ var draggin = function() {
 	
 	function playhead(aciton, place){
 		if (action = 'play'){
-			$secondPush = (convert('2:29.460') / $mixWidth);
-			var count = setTimeout(counting, 2000);
+			$secondPush = ($mixWidth / convert('2:29.460'));
+			var count = setTimeout(counting, 200);
 		}
 	}
 	
@@ -105,9 +106,9 @@ var draggin = function() {
 		var $play = $('#play');
 		counter = counter + $secondPush;
 		console.log(counter);
-		count = setTimeout(counting, 2000);
+		count = setTimeout(counting, 200);
 		$play.css('left', count + '%');
-		$play.find('.time').html(counter)
+		$play.find('.time').html(Math.ceil((counter / 100)))
 	}
 	
 	function abortTimer(){
