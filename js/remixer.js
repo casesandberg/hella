@@ -41,6 +41,14 @@ window.Remixer = (function() {
 
       $("#info").text(percent + "% of song " + songNum + " loaded");
 
+      //  create DOM element...
+      /*<div id="song-1">
+        <h2 class="title">Loading...</h2>
+        <h3 class="artist"></h3>
+        <ul class="bucket">
+        </ul>
+      </div>*/
+
       if (percent < 100) {
         console.log("Song being analyzed.");
       }
@@ -50,6 +58,11 @@ window.Remixer = (function() {
       }
 
       if (track.status == "ok") {
+        $el = $('<div></div>').attr('id', 'song-' + songNum);
+        $el.append('<h2 class="title">Loading...</h2>');
+        $el.append('<h3 class="artist"></h3>');
+        $el.append('<ul class="bucket"></ul>');
+        $("#songs").append($el);
         that.songs.push(track);
         that.loadSongBeatLis();
         console.log("Track analyzed! Song " + songNum + " added.");
@@ -184,6 +197,15 @@ window.Remixer = (function() {
     var title = song.title;
     var artist = song.artist;
     var idSelector = "#song-" + songNum;
+
+    if (title.length > 24) {
+      title = title.substring(0, 21) + '...';
+    }
+
+    if (artist.length > 24) {
+      artist = artist.substring(0, 21) + '...';
+    }
+
     $(idSelector).children(".title").text(title);
     $(idSelector).children(".artist").text(artist);
   };
@@ -227,7 +249,7 @@ window.Remixer = (function() {
 
   Remixer.prototype.bindSnippetPreview = function(songNum) {
     var that = this;
-    var songLiSelector = "li.song-" + songNum;
+    var songLiSelector = "#song-" + songNum + " ul li";
     $(songLiSelector).click(function(event) {
       var snippet = [];
       var beatKey = $(event.target).attr('remix-item');
@@ -254,5 +276,6 @@ window.Remixer = (function() {
 })(this);
 
 window.remixer = new Remixer();
+remixer.addTrack("TRUKTZP1416712D3B8", "https://dl.dropboxusercontent.com/u/34120492/songs/aint_it_funny.mp3");
 remixer.addTrack("TRPJHTS1416713A719", "https://dl.dropboxusercontent.com/u/34120492/songs/ask_myself.mp3");
-remixer.addTrack("TRFLCFM1416A725D8A", "music/forgiveness_and_love.mp3");
+remixer.addTrack("TRYQMCZ1416A710F20", "https://dl.dropboxusercontent.com/u/34120492/songs/crazy_in_love.mp3");

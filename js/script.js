@@ -2,7 +2,7 @@ var draggin = function() {
 	
 	var $mixBucket = $('#song-mix').find('.bucket'),
 		$mixBeats = $mixBucket.find('.beat'), 
-		$songBeats = $('#song-1, #song-2').find('.beat'),
+		$songBeats = $('#songs').find('.beat'),
 		
 		$mixWidth = $mixBucket.width() - 20;
 		
