@@ -276,11 +276,6 @@ window.Remixer = (function() {
 })(this);
 
 window.remixer = new Remixer();
-<<<<<<< HEAD
 remixer.addTrack("TRUKTZP1416712D3B8", "https://dl.dropboxusercontent.com/u/34120492/songs/aint_it_funny.mp3");
 remixer.addTrack("TRPJHTS1416713A719", "https://dl.dropboxusercontent.com/u/34120492/songs/ask_myself.mp3");
 remixer.addTrack("TRYQMCZ1416A710F20", "https://dl.dropboxusercontent.com/u/34120492/songs/crazy_in_love.mp3");
-=======
-remixer.addTrack("TRPJHTS1416713A719", "https://dl.dropboxusercontent.com/u/34120492/songs/ask_myself.mp3");
-remixer.addTrack("TRFLCFM1416A725D8A", "music/forgiveness_and_love.mp3");
->>>>>>> d152212071d89a57f7a1eabb2b69cdcb6168128b
