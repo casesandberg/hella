@@ -12,6 +12,43 @@ h2{
 	margin: 40px 0 20px;
 }
 
+#scrubbing{
+	background: #bbbbbb;
+	height: 34px;
+	line-height: 34px;
+	border-radius: 4px;
+	margin: 0 0 1px;
+	padding: 0 20px;
+	.handle{
+		background: #333;
+		border-radius: 0 4px 4px 0;
+		position: relative;
+		height: 24px;
+		line-height: 24px;
+		display: inline-block;
+		padding: 0 8px;
+		cursor: ew-resize;
+	}
+	.line{
+		width: 1px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 191px;
+		background: #333;
+	}
+	.icon{
+		
+	}
+	.time{
+		font-family: 'helvetica neue', helvetica, arial;
+	font-size: 13px;
+	color: #fff;
+	-webkit-font-smoothing: antialiased;
+	font-weight: 300;
+	}
+}
+
 .bucket{
 	background: #ddd;
 	border-radius: 4px;
@@ -20,15 +57,39 @@ h2{
 	.beat{
 		float: left;
 		height: 120px;
-		box-shadow: inset 0 -2px 0 rgba(0,0,0,.2);
-		margin: 0 4px 0 0;
+		box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.2);
 		border-radius: 4px;
-		width: 5%;
+		transition: width 100ms linear;
+		cursor: all-scroll;
+		width: 1px;
+		margin: 0 1px 0 0;
+	}
+	.song-1{
+		background: #e65b3e;
+	}
+	.song-2{
+		background: #fc8b04;
+	}
+	[data-beats="1"]{
+		width: 50px;
+	}
+	[data-beats="2"]{
+		width: 100px;
 	}
 }
 
 #song-mix{
-	
+	.bucket{
+		padding: 20px 0 20px 20px;
+		overflow: hidden;
+		height: 120px;
+	}
+	.beat{
+		box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+	}
+	.placeholder{
+		box-shadow: none;
+	}
 }
 
 .songs{
@@ -46,53 +107,17 @@ h2{
 			float: right;
 		}
 	}
-	[data-beats="1"]{
-		width: 5%;
-	}
-	[data-beats="2"]{
-		width: 10%;
-	}
-	[data-beats="3"]{
-		width: 15%;
-	}
-	[data-beats="4"]{
-		width: 20%;
-	}
-	[data-beats="5"]{
-		width: 25%;
-	}
-	[data-beats="6"]{
-		width: 30%;
-	}
-	[data-beats="7"]{
-		width: 35%;
-	}
-	[data-beats="8"]{
-		width: 40%;
-	}
-	[data-beats="9"]{
-		width: 45%;
-	}
-	[data-beats="10"]{
-		width: 50%;
-	}
+	
 }
 
-.beat1 {
-	background-color: #00435E;
+#song-1{
+	
 }
 
-.beat2 {
-	background-color: #007777;
+#song-2{
+	
 }
 
-.beat3 {
-	background-color: #00aaaa;
-}
-
-.beat4 {
-	background-color: #00cccc;
-}
 
 @media @vertical-ipad {
 

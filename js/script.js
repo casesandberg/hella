@@ -1,24 +1,102 @@
 var draggin = function() {
 	
-	var $mixBucket = $("#song-mix").find('.bucket'),
+	var $mixBucket = $('#song-mix').find('.bucket'),
 		$mixBeats = $mixBucket.find('.beat'), 
-		$songBeats = $("#song-1, #song-2").find('.beat');
+		$songBeats = $('#song-1, #song-2').find('.beat'),
+		
+		$mixWidth = $mixBucket.width() - 20;
+		
+	resize();
+	
+	//playhead('play');
 	
 	$mixBucket.sortable({
-		revert: true
+		revert: true,
+		update: function (event, ui){        	
+	        resize();
+        },
+        
+        over: function (event, ui){ 
+        	console.log('over');       	
+	        resize();
+	        var draggedBeats = $('.ui-draggable-dragging').attr('data-beats');
+	        console.log(draggedBeats);
+	        var sameWidth = $mixBucket.find('.beat[data-beats="' + draggedBeats + '"]').eq(0).width() - 1;
+	        console.log(sameWidth);
+	        $('.ui-draggable-dragging').css('width', sameWidth);
+        },
+        
+        placeholder: 'placeholder',
+        start: function(event, ui) {
+            var width = $('.ui-draggable-dragging').width();
+			ui.placeholder.addClass('beat').css('width', width);
+        },
     });
+    
     $songBeats.draggable({
 		connectToSortable: $mixBucket,
-		helper: "clone",
-		revert: "invalid"
+		helper: 'clone',
+		revert: 'invalid',
+		
+		drag: function (event, ui){
+			//resize();
+        },
+
+        stop: function (event, ui){
+        	resize();
+        },
+            
     });
-    $( "ul, li" ).disableSelection();
     
-    $("#song-mix").find('.beat').on('mouseup',function(){
-		$(this).remove();
+    $('#scrubbing').find('.handle').draggable({
+		containment: '#scrubbing',
+		axis: 'x'
+    });
+    
+    $('ul, li').disableSelection();
+        
+    $mixBeats.on('mouseup',function(){
+		$(this).css('width', $(this).width());
 	});
+
+	function resize(){
+		console.log('resizing');
+		$mixBeats = $mixBucket.find('.beat').not('.placeholder');
+		console.log('Length:' + $mixBeats.length);
+		var numberOfBeats = 0;
+		for(var i = 0; i < $mixBeats.length; i++){
+			numberOfBeats = numberOfBeats + parseInt($mixBeats.eq(i).attr('data-beats'));
+		}
+		console.log('Number of Beats:' + numberOfBeats);
+		for(var j = 0; j < $mixBeats.length; j++){
+			$mixBeats.eq(j).css('width', (($mixBeats.eq(j).attr('data-beats') * $mixWidth) / numberOfBeats) -1);
+		}
+	}
 	
-	$mixBeats.each(function(){
-		$(this).css('width', '');
-	});
+	function playhead(aciton, place){
+		if (action = 'play'){
+			$secondPush = (convert('2:29.460') / $mixWidth);
+			var count = setTimeout(counting, 2000);
+		}
+	}
+	
+	function convert(input){
+	    var parts = input.split(':');
+	    var result = Number(parts[0]) * 60 + Number(parts[1]);
+		return(result.toFixed(3));
+	}
+	
+	var counter = 0;
+	function counting(){
+		var $play = $('#play');
+		counter = counter + $secondPush;
+		console.log(counter);
+		count = setTimeout(counting, 2000);
+		$play.css('left', count + '%');
+		$play.find('.time').html(counter)
+	}
+	
+	function abortTimer(){
+		clearTimeout(count);
+	}
 }

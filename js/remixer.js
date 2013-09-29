@@ -188,7 +188,7 @@ window.Remixer = (function() {
   Remixer.prototype.$liEl = function(songNum, beatIndex) {
     var key = 'track' + songNum + '_bar' + beatIndex;
     var $beatLi = $('<li></li>').attr('remix-item', key)
-                                .addClass('ui-draggable beat song-' + songNum + ' beat' + (beatIndex % 4 + 1))
+                                .addClass('beat song-' + songNum + ' beat' + (beatIndex % 4 + 1))
                                 .attr('data-beats', 1);
     return $beatLi;
   };
