@@ -67,6 +67,9 @@ window.Remixer = (function() {
         that.loadSongBeatLis();
         console.log("Track analyzed! Song " + songNum + " added.");
         that.loadSongInfo();
+
+        // DUMMY SONG FOR CASE TO PLAY WITH
+        // that.randomSong();
         return track;
       }
     })
@@ -81,16 +84,19 @@ window.Remixer = (function() {
       return song.analysis.beats.length;
     }).analysis.beats.length;
 
-    for (var i = 0; i < numberOfBeats; i++) {
-      if (i % 4 == 0 || i % 4 == 2) {
-        remixed.push(this.songs[0].analysis.beats[i]);
-      } else if (i % 4 == 1 || i % 4 == 3) {
-        remixed.push(this.songs[1].analysis.beats[i]);
+    for (var i = 0; i < 6; i++) {
+      for (var j = 0; j < this.songs.length; j++) {
+        var songNum = j + 1;
+        var beatIndex = i;
+        var key = 'track' + songNum + '_bar' + beatIndex;
+        var song = this.songs[songNum - 1];
+        this.dict[key] = song.analysis.beats[beatIndex];
+        var $beatLi = this.$liEl(songNum, beatIndex);
+        $('#song-list').append($beatLi);
+        this.bindSnippetPreview(songNum);
       }
     }
-
-    return this.remixed;
-
+    draggin();
   };
 
 // Loads the initial beat list items to interact with on the DOM.
@@ -243,7 +249,7 @@ window.Remixer = (function() {
 
   Remixer.prototype.bindSnippetPreview = function(songNum) {
     var that = this;
-    var songLiSelector = "#song-" + songNum + " ul li";
+    var songLiSelector = "li.song-" + songNum;
     $(songLiSelector).click(function(event) {
       var snippet = [];
       var beatKey = $(event.target).attr('remix-item');
@@ -270,6 +276,11 @@ window.Remixer = (function() {
 })(this);
 
 window.remixer = new Remixer();
+<<<<<<< HEAD
 remixer.addTrack("TRUKTZP1416712D3B8", "https://dl.dropboxusercontent.com/u/34120492/songs/aint_it_funny.mp3");
 remixer.addTrack("TRPJHTS1416713A719", "https://dl.dropboxusercontent.com/u/34120492/songs/ask_myself.mp3");
 remixer.addTrack("TRYQMCZ1416A710F20", "https://dl.dropboxusercontent.com/u/34120492/songs/crazy_in_love.mp3");
+=======
+remixer.addTrack("TRPJHTS1416713A719", "https://dl.dropboxusercontent.com/u/34120492/songs/ask_myself.mp3");
+remixer.addTrack("TRFLCFM1416A725D8A", "music/forgiveness_and_love.mp3");
+>>>>>>> d152212071d89a57f7a1eabb2b69cdcb6168128b
