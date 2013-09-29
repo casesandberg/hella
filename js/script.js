@@ -8,7 +8,7 @@ var draggin = function() {
 		
 	resize();
 	
-	//playhead('play');
+	playhead('play');
 	
 	$mixBucket.sortable({
 		revert: true,
