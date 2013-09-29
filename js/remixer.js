@@ -294,7 +294,7 @@ window.Remixer = (function() {
 
   Remixer.prototype.bindSnippetPreview = function(songNum) {
     var that = this;
-    var songLiSelector = "li.song-" + songNum;
+    var songLiSelector = "#song-" + songNum + " ul li";
     $(songLiSelector).click(function(event) {
       var snippet = [];
       var beatKey = $(event.target).attr('remix-item');
@@ -348,5 +348,6 @@ $(".clear-songs").click(function() {
   return false;
 });
 
-remixer.addTrack("TRPJHTS1416713A719", "https://dl.dropboxusercontent.com/u/34120492/songs/ask_myself.mp3");
-remixer.addTrack("TRYQMCZ1416A710F20", "https://dl.dropboxusercontent.com/u/34120492/songs/crazy_in_love.mp3");
+
+remixer.addTrack("TRYSRSK1416B4DB218", "https://dl.dropboxusercontent.com/u/34120492/songs/ignition_remix.mp3");
+remixer.addTrack("TRBYGVJ1416AE3D099", "https://dl.dropboxusercontent.com/u/34120492/songs/ya_hey.mp3");
