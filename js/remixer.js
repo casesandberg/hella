@@ -90,7 +90,11 @@ window.Remixer = (function() {
       if (i % 4 == 0 || i % 4 == 1) {
         var songNum = 1;
       } else {
-        var songNum = _.random(2, this.songs.length - 1);
+        if (this.songs.length == 1) {
+          var songNum = 1;
+        } else {
+          var songNum = _.random(2, this.songs.length);
+        }
       }
       var beatIndex = i;
       var key = 'track' + songNum + '_bar' + beatIndex;
