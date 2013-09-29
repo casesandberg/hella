@@ -156,6 +156,7 @@ window.Remixer = (function() {
 
   Remixer.prototype.pause = function() {
     this.player.stop();
+    $('#play').remove();
   };
 
 
@@ -181,7 +182,7 @@ window.Remixer = (function() {
 
   Remixer.prototype.bindPauseOnClick = function() {
     var that = this;
-    $('.pause').click(function() {
+    $('.stop').click(function() {
       that.pause();
     })
   };
