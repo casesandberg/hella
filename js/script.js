@@ -26,16 +26,21 @@ var draggin = function() {
 	        resize();
 	        var draggedBeats = $('.ui-draggable-dragging').attr('data-beats');
 	        sameWidth = $mixBucket.find('.beat[data-beats="' + draggedBeats + '"]').eq(0).width() - 1;
+	        if (sameWidth == -1){
+		        
+	        }
 	        console.log('over' + sameWidth);
 	        $('.ui-draggable-dragging').css('width', sameWidth);
 	        
 	        ui.placeholder.addClass('beat').css('width', sameWidth - 1);
         },
         
-        
         start: function(event, ui) {
-        	//console.log('start' + sameWidth);
-			
+        	ui.helper.addClass('ui-draggable-dragging'); 
+        },
+        
+        update: function(event, ui) {
+        	ui.helper.removeClass('ui-draggable-dragging'); 
         },
     });
     
