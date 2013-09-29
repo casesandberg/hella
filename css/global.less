@@ -1,5 +1,30 @@
 @import 'baseline.less';
 
+header{
+	height: 54px;
+	line-height: 54px;
+	position: fixed;
+	width: 100%;
+	background: #333;
+	.clearfix;
+	.logo{
+		float: left;
+		font-family: 'Rationale';
+		font-weight: 500;
+		-webkit-font-smoothing: antialiased;
+		color: #fff;
+		font-size: 42px;
+		line-height: 56px;
+		text-transform: uppercase;
+		text-decoration: none;
+		padding: 0 0 0 10px;
+		display: block;
+	}
+	.add{
+		float: right;
+	}
+}
+
 #wrap{
 	padding: 20px;
 }
@@ -9,40 +34,62 @@ h2{
 	color: #333;
 	-webkit-font-smoothing: antialiased;
 	font-weight: 300;
-	margin: 40px 0 20px;
+	margin: 40px 0 0;
+}
+h3{
+	font-family: 'helvetica neue', helvetica, arial;
+	font-size: 15px;
+	color: #999;
+	-webkit-font-smoothing: antialiased;
+	font-weight: 300;
+	margin: 0 0 20px;
 }
 
 #add-songs {
-	margin: 10px auto 10px auto;
-	padding: 10px;
-	background-color: #cccccc;
-	text-align: center;
-	width: 400px;
-	height: 40px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	border-radius: 8px;
-	select {
-		display: inline-block;
-		float: left;
-		height: 40px;
-		vertical-align: middle;
-		margin-top: 5px;
-	}
-	a {
-		background: #333;
-		border-radius: 4px;
-		position: relative;
-		height: 34px;
-		line-height: 34px;
-		display: inline-block;
-		padding: 0 8px;
+	.clearfix;
+	position: relative;
+	margin: 8px 8px 0 0;
+	.plus{
+		position: absolute;
+		height: 54px;
+		margin: -12px 0 0 10px;
+		font-weight: 100px;
 		font-family: 'helvetica neue', helvetica, arial;
-		font-size: 15px;
 		color: #fff;
+		font-size: 36px;
+		-webkit-font-smoothing: none;
+	}
+	select {
+		float: left;
+		height: 38px;
+		-webkit-appearance:none;
+		text-indent: 40px;
+		background: transparent;
+		color: #fff;
+		font-size: 17px;
+		border: 1px solid #fff;
+		border-radius: 4px 0 0 4px;
+		font-family: 'helvetica neue', helvetica, arial;
 		-webkit-font-smoothing: antialiased;
 		font-weight: 300;
+		width: 250px;
+		cursor: pointer;
+	}
+	a{
+		float: left;
+		background: #fff;
+		border-radius: 0 4px 4px 0;
+		height: 38px;
+		color: #333;
+		line-height: 38px;
+		display: inline-block;
+		padding: 0 8px;
+		font-size: 17px;
 		text-decoration: none;
+		font-family: 'helvetica neue', helvetica, arial;
+		-webkit-font-smoothing: antialiased;
+		font-weight: 500;
+		width: 90px;
 	}
 }
 
@@ -163,7 +210,7 @@ h2{
 		width: 50px;
 	}
 	[data-beats="2"]{
-		width: 100px;
+		width: 200px;
 	}
 	&.dragging{
 		.beat{
@@ -176,6 +223,9 @@ h2{
 }
 
 #song-mix{
+	h2{
+		margin: 50px 0 20px;
+	}
 	.bucket{
 		padding: 20px 0 20px 20px;
 		overflow: hidden;
