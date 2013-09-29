@@ -109,9 +109,11 @@ var draggin = function() {
 		count = setTimeout(counting, 200);
 		$play.css('left', count + '%');
 		$play.find('.time').html('0:' + Math.ceil((counter / 100)));
-		if(counter >= length()){
+		/*
+if(counter >= length()){
 			abortTimer()
 		}
+*/
 	}
 	
 	function abortTimer(){

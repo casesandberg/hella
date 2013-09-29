@@ -231,6 +231,7 @@ window.Remixer = (function() {
     var artist = song.artist;
     var idSelector = "#song-" + songNum;
 
+/*
     if (title.length > 24) {
       title = title.substring(0, 21) + '...';
     }
@@ -238,6 +239,7 @@ window.Remixer = (function() {
     if (artist.length > 24) {
       artist = artist.substring(0, 21) + '...';
     }
+*/
 
     $(idSelector).children(".title").text(title);
     $(idSelector).children(".artist").text(artist);
