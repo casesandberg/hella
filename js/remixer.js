@@ -294,7 +294,7 @@ window.Remixer = (function() {
 
   Remixer.prototype.bindSnippetPreview = function(songNum) {
     var that = this;
-    var songLiSelector = "#song-" + songNum + " ul li";
+    var songLiSelector = "li.song-" + songNum;
     $(songLiSelector).click(function(event) {
       var snippet = [];
       var beatKey = $(event.target).attr('remix-item');
