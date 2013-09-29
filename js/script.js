@@ -19,19 +19,23 @@ var draggin = function() {
 	        resize();
         },
         
+        placeholder: 'placeholder',
+        
         over: function (event, ui){ 
         	console.log('over');       	
 	        resize();
 	        var draggedBeats = $('.ui-draggable-dragging').attr('data-beats');
-	        console.log(draggedBeats);
-	        var sameWidth = $mixBucket.find('.beat[data-beats="' + draggedBeats + '"]').eq(0).width() - 1;
-	        console.log(sameWidth);
+	        sameWidth = $mixBucket.find('.beat[data-beats="' + draggedBeats + '"]').eq(0).width() - 1;
+	        console.log('over' + sameWidth);
 	        $('.ui-draggable-dragging').css('width', sameWidth);
+	        
+	        ui.placeholder.addClass('beat').css('width', sameWidth - 1);
         },
         
-        placeholder: 'placeholder',
+        
         start: function(event, ui) {
-			ui.placeholder.addClass('beat').css('width', $('.ui-draggable-dragging').width());
+        	//console.log('start' + sameWidth);
+			
         },
     });
     

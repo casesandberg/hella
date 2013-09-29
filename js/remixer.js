@@ -56,7 +56,7 @@ window.Remixer = (function() {
         that.loadSongInfo();
 
         // DUMMY SONG FOR CASE TO PLAY WITH
-        // that.randomSong();
+        that.randomSong();
         return track;
       }
     })
