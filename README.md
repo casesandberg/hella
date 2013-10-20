@@ -17,11 +17,14 @@ Solve problems with clearing, playing and stopping the playhead. Solve problem t
 ###2. SoundWaves
 Create soundwave images from extracted music signatures, and overlay them on their respective music sequences.
 
-**3. Add Even Smaller Signatures** Go beyond bars and provide beats suquences(as described in the Echo Nest API.)
+###3. Add Even Smaller Signatures
+Go beyond bars and provide beats suquences(as described in the Echo Nest API.)
 
-**4. Playhead scrubbing** Make the playhead movable, so that users can scrub to certain parts in the remix.
+###4. Playhead scrubbing
+Make the playhead movable, so that users can scrub to certain parts in the remix.
 
-**5. Upload MP3s and Download Remixes** Echo Nest graciously provides uploading and downloading capabilities. Utilize them to provide a way to download remixes.
+###5. Upload MP3s and Download Remixes
+Echo Nest graciously provides uploading and downloading capabilities. Utilize them to provide a way to download remixes.
 
 
 ##THX
