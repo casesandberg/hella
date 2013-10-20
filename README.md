@@ -1,10 +1,13 @@
 # ChopShop
 A webapp for remixing music. 
 
-![Check it out!](https://dl.dropboxusercontent.com/u/52893195/Screenshots/Screenshot%202013-10-19%2015.58.46.png "Shot of the Shop")
+[ChopShop](http://chopshopapp.com/# "2ChopShop")
+
+(https://dl.dropboxusercontent.com/u/52893195/Screenshots/Screenshot%202013-10-19%2015.58.46.png "Shot of the Shop")
 
 ## Demo
 http://chopshopapp.com/#
+
 _Provides 'Wrecking Ball','Somebody I used to Know', 'Californication' and **more**_
 
 ##Description
