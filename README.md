@@ -1,9 +1,8 @@
 # ChopShop
 A webapp for remixing music. 
 
-[ChopShop](http://chopshopapp.com/# "2ChopShop")
+[![Shot of the Shop](/https://dl.dropboxusercontent.com/u/52893195/Screenshots/Screenshot%202013-10-19%2015.58.46.png)](http://chopshopapp.com/# "2ChopShop")
 
-(https://dl.dropboxusercontent.com/u/52893195/Screenshots/Screenshot%202013-10-19%2015.58.46.png "Shot of the Shop")
 
 ## Demo
 http://chopshopapp.com/#
